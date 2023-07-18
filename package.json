@@ -1,0 +1,25 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "excel js",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [
+    "excel-js",
+    "js"
+  ],
+  "author": "Maksym Zakharkiv",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.63.6",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
