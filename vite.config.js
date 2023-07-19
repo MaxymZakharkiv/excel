@@ -1,17 +1,10 @@
 import { defineConfig } from "vite";
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
 
 // const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  plugins: [
-    alias({
-      entries: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
-    }),
-  ],
+  entry: "./src/index.html",
   build: {
     rollupOptions: {
       output: {
@@ -23,6 +16,9 @@ export default defineConfig({
     port: 3000,
   },
   resolve: {
+    alias: {
+      // "@": path.resolve(__dirname, "src"),
+    },
     extensions: [".js", ".json", ".ts"],
   },
 });
