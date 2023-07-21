@@ -1,3 +1,5 @@
+import {$} from '../../core/dom'
+
 export class Excel {
   constructor(selector, options) {
     this.$el = document.querySelector(selector);
@@ -5,10 +7,12 @@ export class Excel {
   }
 
   getOptions(){
-    const $root = document.createElement('div')
+    const $root = $.create('div', 'excel')
     this.components.forEach(Component => {
-      const instance = new Component()
-      $root.insertAdjacentHTML('beforeend', instance.getHtml())
+      const $el = $.create('div', Component.className)
+      const instance = new Component($el)
+      $el.innerHTML = instance.getHtml()
+      $root.append($el)
     })
     return $root
   }
