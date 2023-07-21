@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
-// import path from "path";
+import path from "path";
 
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig({
   entry: "./src/index.html",
@@ -17,7 +17,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      // "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "src"),
     },
     extensions: [".js", ".json", ".ts"],
   },
