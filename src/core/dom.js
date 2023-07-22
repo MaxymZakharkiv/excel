@@ -1,7 +1,29 @@
-class Dom{}
+class Dom{
+    constructor(selector){
+        this.$el = typeof selector === 'string'
+            ? document.querySelector(selector)
+            : selector
+    }
+    html(html){
+        if(typeof html === 'string'){
+            this.$el.innerHTML = html
+            return this
+        }
+        return this.$el.outerHTML.trim()
+    }
 
-export function $(){
-    return new Dom()
+    clear(){
+        this.html('')
+        return this
+    }
+
+    append(node){
+        this.$el.append(node.$el)
+    }
+}
+
+export function $(selector){
+    return new Dom(selector)
 }
 
 $.create = (tagName, className = '') => {
@@ -9,5 +31,5 @@ $.create = (tagName, className = '') => {
     if(className){
         $el.classList.add(className)
     }
-    return $el
+    return $($el)
 }
