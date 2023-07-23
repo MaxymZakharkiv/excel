@@ -1,24 +1,26 @@
-import { defineConfig } from "vite";
-import path from "path";
+import { defineConfig } from 'vite'
+import path from 'path'
+import { fileURLToPath, URL } from 'url'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 export default defineConfig({
-  entry: "./src/index.html",
+  entry: './src/index.html',
   build: {
     rollupOptions: {
       output: {
-        manualChunks: undefined,
-      },
-    },
+        manualChunks: undefined
+      }
+    }
   },
   server: {
-    port: 3000,
+    port: 3000
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      // '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': path.resolve(__dirname, './src/')
     },
-    extensions: [".js", ".json", ".ts"],
-  },
-});
+    extensions: ['.js', '.json', '.ts']
+  }
+})
