@@ -11,6 +11,9 @@ export class Excel {
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className)
       const instance = new Component($el)
+
+      window[Component.className] = instance
+
       $el.html(instance.getHtml())
       $root.append($el)
       return instance
