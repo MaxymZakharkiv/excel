@@ -1,8 +1,8 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Header extends ExcelComponent {
-  static className = 'excel__header'
-  getHtml() {
+  static className: string = 'excel__header'
+  getHtml(): string {
     return `
         <input type="text" class="input" value="Нова таблиця" />
     

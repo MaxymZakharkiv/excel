@@ -1,7 +1,7 @@
 import { $ } from '../../core/dom'
 
 export class Excel {
-  constructor(selector, options) {
+  constructor(selector: string, options: []) {
     this.$el = $(selector)
     this.components = options.components || []
   }
@@ -21,7 +21,7 @@ export class Excel {
     return $root
   }
 
-  render() {
+  render(): void {
     this.$el.append(this.getOptions())
 
     this.components.forEach(component => component.init())

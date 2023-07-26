@@ -4,15 +4,15 @@ export class ExcelComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listeners)
   }
-  toHTML() {
+  toHTML(): string {
     return ''
   }
 
-  init() {
+  init(): void {
     this.initDOM()
   }
 
-  destroy() {
+  destroy(): void {
     this.removeDOM()
   }
 }

@@ -1,23 +1,23 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Formula extends ExcelComponent {
-  static className = 'excel__formula'
+  static className: string = 'excel__formula'
 
-  constructor($root) {
+  constructor($root: string) {
     super($root, {
       name: 'Formula',
       listeners: ['input']
     })
   }
 
-  getHtml() {
+  getHtml(): string {
     return `
         <div class="info">fx</div>
         <div class="input" contenteditable spellcheck="false"></div>
         `
   }
 
-  onInput(e) {
+  onInput(e: EventTarget): void {
     console.log('input formula', e)
   }
 }
