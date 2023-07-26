@@ -1,6 +1,6 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
-class Toolbar extends ExcelComponent {
+export class Toolbar extends ExcelComponent {
   static className = 'excel__toolbar'
   getHtml() {
     return `
@@ -31,4 +31,4 @@ class Toolbar extends ExcelComponent {
   }
 }
 
-export default Toolbar
+// export default Toolbar

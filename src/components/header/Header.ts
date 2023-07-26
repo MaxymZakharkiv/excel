@@ -1,6 +1,6 @@
-import { ExcelComponent } from '../../core/ExcelComponent'
+import { ExcelComponent } from '../../core/ExcelComponent.ts'
 
-class Header extends ExcelComponent {
+export class Header extends ExcelComponent {
   static className: string = 'excel__header'
   getHtml(): string {
     return `
@@ -21,4 +21,4 @@ class Header extends ExcelComponent {
   }
 }
 
-export default Header
+// export default Header

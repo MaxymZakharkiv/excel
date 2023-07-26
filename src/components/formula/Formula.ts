@@ -1,6 +1,6 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
-class Formula extends ExcelComponent {
+export class Formula extends ExcelComponent {
   static className: string = 'excel__formula'
 
   constructor($root: string) {
@@ -22,4 +22,4 @@ class Formula extends ExcelComponent {
   }
 }
 
-export default Formula
+// export default Formula

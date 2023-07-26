@@ -1,7 +1,7 @@
 import { $ } from '../../core/dom'
 
-class Excel {
-  constructor(selector: string, options: []) {
+export class Excel {
+  constructor(selector: string, options) {
     this.$el = $(selector)
     this.components = options.components || []
   }
@@ -28,4 +28,4 @@ class Excel {
   }
 }
 
-export default Excel
+// export default Excel
