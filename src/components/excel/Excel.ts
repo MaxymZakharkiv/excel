@@ -1,6 +1,6 @@
 import { $ } from '../../core/dom'
 
-export class Excel {
+class Excel {
   constructor(selector: string, options: []) {
     this.$el = $(selector)
     this.components = options.components || []
@@ -27,3 +27,5 @@ export class Excel {
     this.components.forEach(component => component.init())
   }
 }
+
+export default Excel

@@ -1,6 +1,6 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
-export class Header extends ExcelComponent {
+class Header extends ExcelComponent {
   static className: string = 'excel__header'
   getHtml(): string {
     return `
@@ -20,3 +20,5 @@ export class Header extends ExcelComponent {
           `
   }
 }
+
+export default Header

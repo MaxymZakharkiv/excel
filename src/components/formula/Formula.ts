@@ -1,6 +1,6 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
-export class Formula extends ExcelComponent {
+class Formula extends ExcelComponent {
   static className: string = 'excel__formula'
 
   constructor($root: string) {
@@ -17,7 +17,9 @@ export class Formula extends ExcelComponent {
         `
   }
 
-  onInput(e: EventTarget): void {
+  onInput(e: Event): void {
     console.log('input formula', e)
   }
 }
+
+export default Formula
