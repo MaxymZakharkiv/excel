@@ -3,8 +3,8 @@ const CODES = {
   Z: 90
 }
 
-function createCell(content) {
-  return `<div class="cell" contenteditable="">${content}</div>`
+function createCell() {
+  return `<div class="cell" contenteditable=""></div>`
 }
 
 function createCol(col) {
@@ -28,10 +28,6 @@ function toChar(index) {
   return String.fromCharCode(CODES.A + index)
 }
 
-function toContentCell(name, ind) {
-  return `${name}${ind + 1}`
-}
-
 function createEl({ count, name, index }) {
   return new Array(count)
     .fill('')
@@ -41,7 +37,7 @@ function createEl({ count, name, index }) {
       if (name === 'cols') {
         return createCol(el)
       } else if (name === 'cells') {
-        return createCell(toContentCell(el, index))
+        return createCell()
       }
     })
     .join('')
@@ -52,7 +48,7 @@ export function createTable(rowCount = 20) {
   const rows = []
   rows.push(createRow(createEl({ count: colsCount, name: 'cols' })))
   for (let i = 0; i < rowCount; i++) {
-    rows.push(createRow(createEl({ count: rowCount, name: 'cells', index: i }), i + 1))
+    rows.push(createRow(createEl({ count: colsCount, name: 'cells', index: i }), i + 1))
   }
 
   return rows.join('')
