@@ -11,14 +11,19 @@ function createCol(col) {
   return `
         <div class="column">
             ${col}
+            <div class="col-resize"></div> 
         </div>
     `
 }
 
 function createRow(content, id = '') {
+  const isResize = id ? '<div class="row-resize"></div>' : ''
   return `
         <div class="row">
-            <div class=row-info>${id}</div>
+            <div class=row-info>
+              ${id}
+              ${isResize}
+            </div>
             <div class=row-data>${content}</div>
         </div>    
     `
