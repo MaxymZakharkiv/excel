@@ -9,17 +9,17 @@ function createCell() {
 
 function createCol(col) {
   return `
-        <div class="column">
+        <div class="column" data-type="resizable">
             ${col}
-            <div class="col-resize"></div> 
+            <div class="col-resize" data-resize="col"></div> 
         </div>
     `
 }
 
 function createRow(content, id = '') {
-  const isResize = id ? '<div class="row-resize"></div>' : ''
+  const isResize = id ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-        <div class="row">
+        <div class="row" data-type="resizable">
             <div class=row-info>
               ${id}
               ${isResize}
