@@ -3,13 +3,13 @@ const CODES = {
   Z: 90
 }
 
-function createCell() {
-  return `<div class="cell" contenteditable=""></div>`
+function createCell(ind) {
+  return `<div class="cell" data-col="${ind}" contenteditable=""></div>`
 }
 
-function createCol(col) {
+function createCol(col, index) {
   return `
-        <div class="column" data-type="resizable">
+        <div class="column" data-type="resizable" data-col="${index}">
             ${col}
             <div class="col-resize" data-resize="col"></div> 
         </div>
@@ -37,12 +37,11 @@ function createEl({ count, name, index }) {
   return new Array(count)
     .fill('')
     .map((_, index) => toChar(index))
-    .map(el => {
-      createCol(el)
+    .map((el, ind) => {
       if (name === 'cols') {
-        return createCol(el)
+        return createCol(el, ind)
       } else if (name === 'cells') {
-        return createCell()
+        return createCell(ind)
       }
     })
     .join('')
