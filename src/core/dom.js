@@ -19,11 +19,31 @@ class Dom {
     this.$el.append(node.$el)
   }
 
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  get data() {
+    return this.$el.dataset
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
   on(eventType, cb) {
     this.$el.addEventListener(eventType, cb)
   }
   off(eventType, cb) {
     this.$el.removeEventListener(eventType, cb)
+  }
+
+  css(style = {}) {
+    Object.entries(style).forEach(([key, value]) => (this.$el.style[key] = value))
   }
 }
 

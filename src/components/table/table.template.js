@@ -3,22 +3,27 @@ const CODES = {
   Z: 90
 }
 
-function createCell() {
-  return `<div class="cell" contenteditable=""></div>`
+function createCell(ind) {
+  return `<div class="cell" data-col="${ind}" contenteditable=""></div>`
 }
 
-function createCol(col) {
+function createCol(col, index) {
   return `
-        <div class="column">
+        <div class="column" data-type="resizable" data-col="${index}">
             ${col}
+            <div class="col-resize" data-resize="col"></div> 
         </div>
     `
 }
 
 function createRow(content, id = '') {
+  const isResize = id ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-        <div class="row">
-            <div class=row-info>${id}</div>
+        <div class="row" data-type="resizable">
+            <div class=row-info>
+              ${id}
+              ${isResize}
+            </div>
             <div class=row-data>${content}</div>
         </div>    
     `
@@ -32,12 +37,11 @@ function createEl({ count, name, index }) {
   return new Array(count)
     .fill('')
     .map((_, index) => toChar(index))
-    .map(el => {
-      createCol(el)
+    .map((el, ind) => {
       if (name === 'cols') {
-        return createCol(el)
+        return createCol(el, ind)
       } else if (name === 'cells') {
-        return createCell()
+        return createCell(ind)
       }
     })
     .join('')
