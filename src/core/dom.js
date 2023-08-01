@@ -41,6 +41,10 @@ class Dom {
   off(eventType, cb) {
     this.$el.removeEventListener(eventType, cb)
   }
+
+  css(style = {}) {
+    Object.entries(style).forEach(([key, value]) => (this.$el.style[key] = value))
+  }
 }
 
 export function $(selector) {
