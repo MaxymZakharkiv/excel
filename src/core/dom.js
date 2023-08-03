@@ -46,7 +46,6 @@ class Dom {
     return $(this.$el.querySelectorAll(selector))
   }
   addClass(className) {
-    console.log(className)
     if (this.$el[0]) {
       this.$el[0].classList.add(className)
     } else {
