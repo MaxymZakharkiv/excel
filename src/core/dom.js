@@ -47,10 +47,18 @@ class Dom {
   }
   addClass(className) {
     // this.$el.classList.add(className)
-    this.$el[0].classList.add(className)
+    if (this.$el[0]) {
+      this.$el[0].classList.add(className)
+    } else {
+      this.$el.classList.add(className)
+    }
   }
   removeClass(className) {
-    this.$el[0].classList.remove(className)
+    if (this.$el[0]) {
+      this.$el[0].classList.remove(className)
+    } else {
+      this.$el.classList.remove(className)
+    }
   }
   css(style = {}) {
     Object.entries(style).forEach(([key, value]) => (this.$el.style[key] = value))

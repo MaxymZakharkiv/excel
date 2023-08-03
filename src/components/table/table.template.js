@@ -4,7 +4,7 @@ const CODES = {
 }
 
 function createCell(ind, rowIndex) {
-  return `<div class="cell" data-col="${ind}" data-id="${rowIndex}:${ind}" contenteditable=""></div>`
+  return `<div class="cell" data-type="cell" data-col="${ind}" data-id="${rowIndex}:${ind}" contenteditable=""></div>`
 }
 
 function createCol(col, index) {
