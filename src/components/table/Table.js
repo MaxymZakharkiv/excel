@@ -5,14 +5,14 @@ import { tableResize } from './table.resize'
 import { createTable } from './table.template'
 import { TableSelection } from './TableSelection'
 import { $ } from '../../core/dom'
-import { range, matrix, currentCoords } from '../../core/utils'
+import { matrix, currentCoords, nextSelector } from './function/index'
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
   constructor($root) {
     super($root, {
-      listeners: ['mousedown']
+      listeners: ['mousedown', 'keydown']
     })
   }
 
@@ -47,27 +47,14 @@ export class Table extends ExcelComponent {
       }
     }
   }
+
+  onKeydown(e) {
+    const keys = ['Enter', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
+    if (keys.includes(e.key) && !e.shiftKey) {
+      e.preventDefault()
+      const coords = currentCoords(this.selection.current.$el)
+      const next = this.$root.find(nextSelector(e.key, coords))
+      this.selection.select(next)
+    }
+  }
 }
-
-// function currentCoords(el) {
-//   const current = el.$el
-//   let rowCur
-//   let colCur
-//   if (current[0]) {
-//     rowCur = current[0].dataset.id.split(':')[0]
-//     colCur = current[0].dataset.id.split(':')[1]
-//   } else {
-//     rowCur = current.dataset.id.split(':')[0]
-//     colCur = current.dataset.id.split(':')[1]
-//   }
-//   return [rowCur, colCur]
-// }
-
-// function matrix(rowPrev, colPrev, rowCur, colCur) {
-//   const cols = range(+colCur, +colPrev)
-//   const rows = range(+rowCur, +rowPrev)
-//   return cols.reduce((acc, col) => {
-//     rows.forEach(row => acc.push(`${row}:${col}`))
-//     return acc
-//   }, [])
-// }
