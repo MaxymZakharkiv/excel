@@ -15,6 +15,10 @@ class Dom {
     return this
   }
 
+  text(text) {
+    this.$el.textContent = text
+  }
+
   append(node) {
     this.$el.append(node.$el)
   }

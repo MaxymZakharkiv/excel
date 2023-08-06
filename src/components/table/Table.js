@@ -10,9 +10,11 @@ import { matrix, currentCoords, nextSelector } from './function/index'
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      listeners: ['mousedown', 'keydown']
+      name: 'Table',
+      listeners: ['mousedown', 'keydown'],
+      ...options
     })
   }
 
@@ -28,6 +30,9 @@ export class Table extends ExcelComponent {
     super.init()
     const cell = this.$root.find('[data-id="0:0"]')
     this.selection.select(cell)
+    this.emmiter.subscribe('asd', info => {
+      this.selection.current.text(info)
+    })
   }
 
   onMousedown(e) {
