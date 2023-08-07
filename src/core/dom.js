@@ -16,7 +16,25 @@ class Dom {
   }
 
   text(text) {
-    this.$el.textContent = text
+    if (this.$el[0]) {
+      if (text && typeof text === 'string') {
+        this.$el[0].textContent = text
+        return this
+      }
+      if (this.$el[0].tagName.toLowerCase() === 'input') {
+        return this.$el.value.trim()
+      }
+      return this.$el[0].textContent.trim()
+    } else {
+      if (text && typeof text === 'string') {
+        this.$el.textContent = text
+        return this
+      }
+      if (this.$el.tagName.toLowerCase() === 'input') {
+        return this.$el.value.trim()
+      }
+      return this.$el.textContent.trim()
+    }
   }
 
   append(node) {

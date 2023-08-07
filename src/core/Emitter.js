@@ -10,7 +10,6 @@ export class Emitter {
   }
 
   subscribe(eventName, func) {
-    console.log('subscribe')
     this.listeners[eventName] = this.listeners[eventName] || []
     this.listeners[eventName].push(func)
     return () => {
