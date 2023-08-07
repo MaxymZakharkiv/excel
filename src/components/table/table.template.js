@@ -3,8 +3,8 @@ const CODES = {
   Z: 90
 }
 
-function createCell(ind) {
-  return `<div class="cell" data-col="${ind}" contenteditable=""></div>`
+function createCell(ind, rowIndex) {
+  return `<div class="cell" data-col="${ind}" data-type="cell" data-id="${rowIndex}:${ind}" contenteditable=""></div>`
 }
 
 function createCol(col, index) {
@@ -33,7 +33,7 @@ function toChar(index) {
   return String.fromCharCode(CODES.A + index)
 }
 
-function createEl({ count, name, index }) {
+function createEl({ count, name, rowIndex }) {
   return new Array(count)
     .fill('')
     .map((_, index) => toChar(index))
@@ -41,7 +41,7 @@ function createEl({ count, name, index }) {
       if (name === 'cols') {
         return createCol(el, ind)
       } else if (name === 'cells') {
-        return createCell(ind)
+        return createCell(ind, rowIndex)
       }
     })
     .join('')
@@ -52,7 +52,7 @@ export function createTable(rowCount = 20) {
   const rows = []
   rows.push(createRow(createEl({ count: colsCount, name: 'cols' })))
   for (let i = 0; i < rowCount; i++) {
-    rows.push(createRow(createEl({ count: colsCount, name: 'cells', index: i }), i + 1))
+    rows.push(createRow(createEl({ count: colsCount, name: 'cells', rowIndex: i }), i + 1))
   }
 
   return rows.join('')

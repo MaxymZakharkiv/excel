@@ -15,6 +15,28 @@ class Dom {
     return this
   }
 
+  text(text) {
+    if (this.$el[0]) {
+      if (text && typeof text === 'string') {
+        this.$el[0].textContent = text
+        return this
+      }
+      if (this.$el[0].tagName.toLowerCase() === 'input') {
+        return this.$el.value.trim()
+      }
+      return this.$el[0].textContent.trim()
+    } else {
+      if (text && typeof text === 'string') {
+        this.$el.textContent = text
+        return this
+      }
+      if (this.$el.tagName.toLowerCase() === 'input') {
+        return this.$el.value.trim()
+      }
+      return this.$el.textContent.trim()
+    }
+  }
+
   append(node) {
     this.$el.append(node.$el)
   }
@@ -42,6 +64,31 @@ class Dom {
     this.$el.removeEventListener(eventType, cb)
   }
 
+  find(selector) {
+    return $(this.$el.querySelectorAll(selector))
+  }
+  addClass(className) {
+    if (this.$el[0]) {
+      this.$el[0].classList.add(className)
+    } else {
+      this.$el.classList.add(className)
+    }
+  }
+  focus() {
+    if (this.$el[0]) {
+      this.$el[0].focus()
+    } else {
+      this.$el.focus()
+    }
+    return this
+  }
+  removeClass(className) {
+    if (this.$el[0]) {
+      this.$el[0].classList.remove(className)
+    } else {
+      this.$el.classList.remove(className)
+    }
+  }
   css(style = {}) {
     Object.entries(style).forEach(([key, value]) => (this.$el.style[key] = value))
   }
