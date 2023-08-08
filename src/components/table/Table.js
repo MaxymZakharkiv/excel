@@ -41,6 +41,9 @@ export class Table extends ExcelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
+    this.subscribe(state => {
+      console.log('store', state)
+    })
   }
 
   onMousedown(e) {
@@ -56,7 +59,7 @@ export class Table extends ExcelComponent {
         const cells = matrix(rowPrev, colPrev, rowCur, colCur).map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.multiplySelect(cells)
       } else {
-        this.selection.select($target)
+        this.selectCell($target)
       }
     }
   }
