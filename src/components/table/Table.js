@@ -20,7 +20,7 @@ export class Table extends ExcelComponent {
   }
 
   getHtml() {
-    return createTable()
+    return createTable(30, this.store.getState())
   }
 
   prepare() {
@@ -61,7 +61,7 @@ export class Table extends ExcelComponent {
       this.resizeTable(e)
     } else if (isCell(e)) {
       const $target = $(e.target)
-      if (event.shiftKey) {
+      if (e.shiftKey) {
         const [rowPrev, colPrev] = $target.data.id.split(':')
 
         const [rowCur, colCur] = currentCoords(this.selection.current)

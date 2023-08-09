@@ -16,7 +16,7 @@ export function tableResize(root, e) {
     const cells = root.findAll(`[data-col="${$parent.data.col}"]`)
 
     document.onmousemove = event => {
-      if (e.target.dataset.resize === 'col') {
+      if (type === 'col') {
         const delta = event.pageX - coords.right
         value = coords.width + delta
         $resizer.css({
@@ -35,7 +35,7 @@ export function tableResize(root, e) {
       document.onmousemove = null
       document.onmouseup = null
 
-      if (e.target.dataset.resize === 'col') {
+      if (type === 'col') {
         $parent.css({
           width: value + 'px'
         })
@@ -48,7 +48,8 @@ export function tableResize(root, e) {
 
       resolve({
         value,
-        id: type === 'col' ? $parent.data.col : null
+        type,
+        id: $parent.data[type]
       })
 
       $resizer.css({
