@@ -6,6 +6,7 @@ import { createTable } from './table.template'
 import { TableSelection } from './TableSelection'
 import { $ } from '../../core/dom'
 import { matrix, currentCoords, nextSelector } from './function/index'
+import * as actions from '../../stores/actions'
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -41,14 +42,23 @@ export class Table extends ExcelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
-    this.subscribe(state => {
-      console.log('store', state)
-    })
+    // this.subscribe(state => {
+    //   console.log('store', state)
+    // })
+  }
+
+  async resizeTable(e) {
+    try {
+      const data = await tableResize(this.$root, e)
+      this.dispatch(actions.tableResize(data))
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   onMousedown(e) {
     if (isResize(e)) {
-      tableResize(this.$root, e)
+      this.resizeTable(e)
     } else if (isCell(e)) {
       const $target = $(e.target)
       if (event.shiftKey) {
