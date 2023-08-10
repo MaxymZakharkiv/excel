@@ -38,13 +38,11 @@ export class Table extends ExcelComponent {
     this.selectCell(cell)
     this.$on('formula:input', info => {
       this.selection.current.text(info)
+      this.updateTextInStore(info)
     })
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
-    // this.subscribe(state => {
-    //   console.log('store', state)
-    // })
   }
 
   async resizeTable(e) {
@@ -84,7 +82,15 @@ export class Table extends ExcelComponent {
     }
   }
 
+  updateTextInStore(value) {
+    this.dispatch(
+      actions.changeText({
+        id: this.selection.current.$el.dataset?.id,
+        value
+      })
+    )
+  }
   onInput(e) {
-    this.$emit('table:input', $(e.target))
+    this.updateTextInStore($(e.target).text())
   }
 }

@@ -15,14 +15,17 @@ function getHeight(state, index) {
 }
 
 function createCell(ind, rowIndex, state) {
+  const width = getWidth(state.colState, ind)
+  const id = `${rowIndex}:${ind}`
+  const data = state.dataState[id] || ''
   return `
     <div class="cell" 
         data-col="${ind}" 
         data-type="cell" 
-        style="width: ${getWidth(state.colState, ind)}"
-        data-id="${rowIndex}:${ind}" 
-        contenteditable="">
-    </div>
+        style="width:${width}"
+        data-id="${id}" 
+        contenteditable=""
+    >${data}</div>
 `
 }
 
