@@ -6,6 +6,7 @@ import { createTable } from './table.template'
 import { TableSelection } from './TableSelection'
 import { $ } from '../../core/dom'
 import { matrix, currentCoords, nextSelector } from './function/index'
+import * as actions from '../../stores/actions'
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -19,7 +20,7 @@ export class Table extends ExcelComponent {
   }
 
   getHtml() {
-    return createTable()
+    return createTable(30, this.store.getState())
   }
 
   prepare() {
@@ -37,18 +38,28 @@ export class Table extends ExcelComponent {
     this.selectCell(cell)
     this.$on('formula:input', info => {
       this.selection.current.text(info)
+      this.updateTextInStore(info)
     })
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
   }
 
+  async resizeTable(e) {
+    try {
+      const data = await tableResize(this.$root, e)
+      this.dispatch(actions.tableResize(data))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   onMousedown(e) {
     if (isResize(e)) {
-      tableResize(this.$root, e)
+      this.resizeTable(e)
     } else if (isCell(e)) {
       const $target = $(e.target)
-      if (event.shiftKey) {
+      if (e.shiftKey) {
         const [rowPrev, colPrev] = $target.data.id.split(':')
 
         const [rowCur, colCur] = currentCoords(this.selection.current)
@@ -56,7 +67,7 @@ export class Table extends ExcelComponent {
         const cells = matrix(rowPrev, colPrev, rowCur, colCur).map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.multiplySelect(cells)
       } else {
-        this.selection.select($target)
+        this.selectCell($target)
       }
     }
   }
@@ -71,7 +82,15 @@ export class Table extends ExcelComponent {
     }
   }
 
+  updateTextInStore(value) {
+    this.dispatch(
+      actions.changeText({
+        id: this.selection.current.$el.dataset?.id,
+        value
+      })
+    )
+  }
   onInput(e) {
-    this.$emit('table:input', $(e.target))
+    this.updateTextInStore($(e.target).text())
   }
 }
