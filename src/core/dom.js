@@ -89,6 +89,10 @@ class Dom {
       this.$el.classList.remove(className)
     }
   }
+  clear() {
+    this.html('')
+    return this
+  }
   css(style = {}) {
     Object.entries(style).forEach(([key, value]) => (this.$el.style[key] = value))
   }

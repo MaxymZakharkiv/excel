@@ -9,16 +9,24 @@ import { Header } from './components/header/Header'
 import { Toolbar } from './components/toolbar/Toolbar'
 import { Formula } from './components/formula/Formula'
 import { Table } from './components/table/Table'
+import { Router } from './router/router'
+import { DashboardPage } from './pages/DashboardPage'
+import { ExcelPage } from './pages/ExcelPage'
 
-const store = createStore(indexStore, initialState)
-
-store.subscribe(state => {
-  storage('resize-table-state', state)
+new Router('#app', {
+  dashboard: DashboardPage,
+  excel: ExcelPage
 })
 
-const excel = new Excel('#app', {
-  components: [Header, Toolbar, Formula, Table],
-  store
-})
-
-excel.render()
+// const store = createStore(indexStore, initialState)
+//
+// store.subscribe(state => {
+//   storage('resize-table-state', state)
+// })
+//
+// const excel = new Excel('#app', {
+//   components: [Header, Toolbar, Formula, Table],
+//   store
+// })
+//
+// excel.render()
