@@ -9,13 +9,18 @@ import { Toolbar } from '../components/toolbar/Toolbar'
 import { Formula } from '../components/formula/Formula'
 import { Table } from '../components/table/Table'
 
+export function storageName(param) {
+  return `excel:${param}`
+}
+
 export class ExcelPage extends Page {
   getRoot() {
-    console.log(this.params)
+    const params = this.params ? this.params : Date.now().toString()
+
     const store = createStore(indexStore, initialState)
 
     store.subscribe(state => {
-      storage('resize-table-state', state)
+      storage(storageName(params), state)
     })
 
     this.excel = new Excel({

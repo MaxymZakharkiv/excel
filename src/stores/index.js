@@ -9,7 +9,6 @@ export function indexStore(state, action) {
       preState[action.data.id] = action.data.value
       return { ...state, [field]: preState }
     case CHANGE_TEXT:
-      // console.log(action.data)
       preState = state['dataState'] || {}
       preState[action.data.id] = action.data.value
       return { ...state, currentText: action.data.value, dataState: preState }
