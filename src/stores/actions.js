@@ -1,4 +1,4 @@
-import { TABLE_RESIZE, CHANGE_TEXT } from './const'
+import { TABLE_RESIZE, CHANGE_TEXT, UPDATE_DATE } from './const'
 
 export function tableResize(data) {
   return {
@@ -11,5 +11,11 @@ export function changeText(data) {
   return {
     type: CHANGE_TEXT,
     data
+  }
+}
+
+export function updateDate() {
+  return {
+    type: UPDATE_DATE
   }
 }
