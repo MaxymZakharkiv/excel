@@ -5,7 +5,8 @@ const defaultState = {
   rowState: {},
   colState: {},
   currentText: '',
-  dataState: {}
+  dataState: {},
+  openedDate: new Date().toJSON()
 }
 
 const idTable = window.location.hash.split('/')[1]
