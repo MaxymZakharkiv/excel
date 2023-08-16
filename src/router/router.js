@@ -3,7 +3,9 @@ import { ActiveRoute } from './activeRoute'
 
 export class Router {
   constructor(selector, routes) {
+    console.log(selector)
     this.$placeholder = $(selector)
+    console.log(this.$placeholder)
     this.routes = routes
     this.changePageHandler = this.changePageHandler.bind(this)
     this.page = null
