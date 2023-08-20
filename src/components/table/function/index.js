@@ -1,20 +1,7 @@
-export function capitalize(str) {
-  if (typeof str !== 'string') {
-    return ''
-  }
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-export function range(start, end) {
-  if (start > end) {
-    ;[end, start] = [start, end]
-  }
-  return new Array(end - start + 1).fill('').map((_, index) => start + index)
-}
-<<<<<<< HEAD
+import { range } from '../../../core/utils'
 
 export function currentCoords(el) {
-  const current = el.$el
+  const current = el?.$el ?? el
   let rowCur
   let colCur
   if (current[0]) {
@@ -35,5 +22,23 @@ export function matrix(rowPrev, colPrev, rowCur, colCur) {
     return acc
   }, [])
 }
-=======
->>>>>>> 73a716a3947905c5bd6e7918be8218d7527d9b8f
+
+export function nextSelector(key, coords) {
+  const MIN_VALUE = 0
+  let [row, col] = coords
+  if (key === 'Enter') {
+    row++
+  } else if (key === 'Tab') {
+    col++
+  } else if (key === 'ArrowLeft') {
+    col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1
+  } else if (key === 'ArrowRight') {
+    col++
+  } else if (key === 'ArrowUp') {
+    row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1
+  } else if (key === 'ArrowDown') {
+    row++
+  }
+
+  return `[data-id="${row}:${col}"]`
+}
